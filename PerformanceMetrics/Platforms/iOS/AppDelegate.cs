@@ -1,6 +1,6 @@
 using Foundation;
 
-namespace MauiAiAssistViewPerformanceMetrics
+namespace MauiAIAssistViewPerformanceMetrics
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

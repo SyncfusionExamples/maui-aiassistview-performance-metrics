@@ -1,4 +1,4 @@
-namespace MauiAiAssistViewPerformanceMetrics.Views;
+namespace MauiAIAssistViewPerformanceMetrics.Views;
 
 public partial class MainPage : ContentPage
 {

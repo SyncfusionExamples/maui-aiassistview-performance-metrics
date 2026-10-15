@@ -1,13 +1,12 @@
-using MauiAiAssistViewPerformanceMetrics.Services;
-using MauiAiAssistViewPerformanceMetrics.ViewModels;
-using MauiAiAssistViewPerformanceMetrics.Views;
+using MauiAIAssistViewPerformanceMetrics.ViewModels;
+using MauiAIAssistViewPerformanceMetrics.Views;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 #if MAUI_DEVFLOW
 using Microsoft.Maui.DevFlow.Agent;
 #endif
 
-namespace MauiAiAssistViewPerformanceMetrics;
+namespace MauiAIAssistViewPerformanceMetrics;
 
 public static class MauiProgram
 {
@@ -32,10 +31,6 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<ChatViewModel>();
         builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<AssistViewPage>();
-        builder.Services.AddSingleton<IAppNavigationService, AppNavigationService>();
-        builder.Services.AddSingleton<IAlertService, PageAlertService>();
-        builder.Services.AddSingleton<IBenchmarkEnvironment, BenchmarkEnvironment>();
 
         return builder.Build();
     }

@@ -1,6 +1,6 @@
 using Syncfusion.Maui.AIAssistView;
 
-namespace MauiAiAssistViewPerformanceMetrics.Control;
+namespace MauiAIAssistViewPerformanceMetrics.Control;
 
 public class BenchmarkAssistView : SfAIAssistView
 {

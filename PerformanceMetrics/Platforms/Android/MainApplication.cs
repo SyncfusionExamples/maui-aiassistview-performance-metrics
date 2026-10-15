@@ -1,7 +1,7 @@
 using Android.App;
 using Android.Runtime;
 
-namespace MauiAiAssistViewPerformanceMetrics
+namespace MauiAIAssistViewPerformanceMetrics
 {
     [Application]
     public class MainApplication : MauiApplication

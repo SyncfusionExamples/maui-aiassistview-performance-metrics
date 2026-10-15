@@ -1,7 +1,7 @@
 using ObjCRuntime;
 using UIKit;
 
-namespace MauiAiAssistViewPerformanceMetrics
+namespace MauiAIAssistViewPerformanceMetrics
 {
     public class Program
     {

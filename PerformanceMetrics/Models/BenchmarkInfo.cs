@@ -1,10 +1,10 @@
-namespace MauiAiAssistViewPerformanceMetrics.Models;
+namespace MauiAIAssistViewPerformanceMetrics.Models;
 
 public sealed record BenchmarkInfo
 {
     public string SyncfusionVersion { get; init; } = "Unknown";
 
-    public string DotNetVersion { get; init; } = string.Empty;
+    public string DotNetVersion { get; init; } = "10.0.110";
 
     public string BuildConfiguration { get; init; } = string.Empty;
 

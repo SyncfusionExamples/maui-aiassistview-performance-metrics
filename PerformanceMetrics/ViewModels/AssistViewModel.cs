@@ -1,44 +1,32 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
-using MauiAiAssistViewPerformanceMetrics.Models;
-using MauiAiAssistViewPerformanceMetrics.Services;
+using MauiAIAssistViewPerformanceMetrics.Models;
 using Syncfusion.Maui.AIAssistView;
 
-namespace MauiAiAssistViewPerformanceMetrics.ViewModels;
+namespace MauiAIAssistViewPerformanceMetrics.ViewModels;
 
-public sealed class ChatViewModel : INotifyPropertyChanged
+public sealed class AssistViewModel : INotifyPropertyChanged
 {
     private const int TotalItemsPerRun = 100;
     private const int WarmupRunCount = 1;
     private const int MeasuredRunCount = 5;
-
     private readonly List<double> _runTimes = [];
-    private readonly IAppNavigationService _navigationService;
-    private readonly IAlertService _alertService;
-    private readonly IBenchmarkEnvironment _benchmarkEnvironment;
     private Stopwatch? _loadStopwatch;
-    private double _dataPreparationTimeSeconds;
     private BenchmarkInfo _benchmarkInfo = new();
 
-    public ChatViewModel(
-        IAppNavigationService navigationService,
-        IAlertService alertService,
-        IBenchmarkEnvironment benchmarkEnvironment)
+    public AssistViewModel()
     {
-        _navigationService = navigationService;
-        _alertService = alertService;
-        _benchmarkEnvironment = benchmarkEnvironment;
-        LoadItemsCommand = new Command(async () => await LoadItemsAsync());
-        GetDetailsCommand = new Command(async () => await ShowBenchmarkDetailsAsync());
+        this.GenerateAssistItems();
+        LoadItemsCommand = new Command(StartLoad);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<IAssistItem> AssistItems { get; } = [];
+    public ObservableCollection<IAssistItem> AssistItems { get; set; } = [];
 
     public BenchmarkInfo BenchmarkInfo
     {
@@ -57,8 +45,6 @@ public sealed class ChatViewModel : INotifyPropertyChanged
     }
 
     public ICommand LoadItemsCommand { get; }
-
-    public ICommand GetDetailsCommand { get; }
 
     public string BenchmarkDetails
     {
@@ -82,45 +68,10 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         }
     }
 
-    private async Task LoadItemsAsync()
+    private void StartLoad()
     {
+        _loadStopwatch?.Stop();
         _loadStopwatch = Stopwatch.StartNew();
-        AssistItems.Clear();
-
-        var baseTime = DateTime.Now;
-        for (var index = 1; index <= TotalItemsPerRun / 2; index++)
-        {
-            var request = new AssistItem
-            {
-                Text = $"Request {index}: Explain MAUI feature {index}",
-                IsRequested = true,
-                DateTime = baseTime.AddMinutes(index)
-            };
-
-            var response = new AssistItem
-            {
-                Text = @$"## Response {index}
-- .NET MAUI provides a single framework for building Android, iOS, macOS, and Windows applications,Supports native performance and UI rendering.",
-                //Text = $"Response {index}: .NET MAUI provides a single framework for building Android, iOS, macOS and Windows applications. It supports native performance and UI rendering.",
-                IsRequested = false,
-                RequestItem = request,
-                DateTime = baseTime.AddMinutes(index + 1)
-            };
-
-            AssistItems.Add(request);
-            AssistItems.Add(response);
-        }
-
-        try
-        {
-            await _navigationService.NavigateToAssistViewAsync();
-        }
-        catch
-        {
-            _loadStopwatch.Stop();
-            _loadStopwatch = null;
-            throw;
-        }
     }
 
     public void CompleteLoadAfterArrange()
@@ -138,8 +89,33 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         UpdateBenchmarkInfo(elapsedSeconds);
     }
 
-    private async Task ShowBenchmarkDetailsAsync() =>
-        await _alertService.ShowAlertAsync("Benchmark Details", BenchmarkDetails, "OK");
+    private void GenerateAssistItems()
+    {
+        AssistItems.Clear();
+
+        var baseTime = DateTime.Now;
+        for (var index = 1; index <= TotalItemsPerRun / 2; index++)
+        {
+            var request = new AssistItem
+            {
+                Text = $"Request {index}: Explain MAUI feature {index}",
+                IsRequested = true,
+                DateTime = baseTime.AddMinutes(index)
+            };
+
+            var response = new AssistItem
+            {
+                Text = @$"## Response {index}
+                - .NET MAUI provides a single framework for building Android, iOS, macOS, and Windows applications,Supports native performance and UI rendering.",
+                IsRequested = false,
+                RequestItem = request,
+                DateTime = baseTime.AddMinutes(index + 1)
+            };
+
+            AssistItems.Add(request);
+            AssistItems.Add(response);
+        }
+    }
 
     private void UpdateBenchmarkInfo(double lastRunSeconds)
     {
@@ -150,7 +126,7 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         BenchmarkInfo = new BenchmarkInfo
         {
             SyncfusionVersion = typeof(SfAIAssistView).Assembly.GetName().Version?.ToString() ?? "Unknown",
-            DotNetVersion = _benchmarkEnvironment.DotNetVersion,
+            DotNetVersion = RuntimeInformation.FrameworkDescription,
 #if DEBUG
             BuildConfiguration = "Debug",
 #else

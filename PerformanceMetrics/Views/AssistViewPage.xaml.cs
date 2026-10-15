@@ -1,6 +1,6 @@
-using MauiAiAssistViewPerformanceMetrics.ViewModels;
+using MauiAIAssistViewPerformanceMetrics.ViewModels;
 
-namespace MauiAiAssistViewPerformanceMetrics.Views;
+namespace MauiAIAssistViewPerformanceMetrics.Views;
 
 public partial class AssistViewPage : ContentPage
 {
