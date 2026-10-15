@@ -7,7 +7,7 @@
              xmlns:markdown="clr-namespace:Syncfusion.Maui.MarkdownViewer;assembly=Syncfusion.Maui.MarkdownViewer"
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.AIAssistView;assembly=Syncfusion.Maui.AIAssistView"
              x:Class="MauiAIAssistViewPerformanceMetrics.Views.AssistViewPage"
-             x:DataType="vm:ChatViewModel"
+             x:DataType="vm:AssistViewModel"
              Title="AssistView Benchmark">
     
     <Grid RowDefinitions="Auto,*">

@@ -105,8 +105,7 @@ public sealed class AssistViewModel : INotifyPropertyChanged
 
             var response = new AssistItem
             {
-                Text = @$"## Response {index}
-                - .NET MAUI provides a single framework for building Android, iOS, macOS, and Windows applications,Supports native performance and UI rendering.",
+                Text = $"Response {index} .NET MAUI provides a single framework for building Android, iOS, macOS, and Windows applications,Supports native performance and UI rendering.",
                 IsRequested = false,
                 RequestItem = request,
                 DateTime = baseTime.AddMinutes(index + 1)

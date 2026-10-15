@@ -29,7 +29,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton<ChatViewModel>();
+        builder.Services.AddSingleton<AssistViewModel>();
         builder.Services.AddTransient<MainPage>();
 
         return builder.Build();

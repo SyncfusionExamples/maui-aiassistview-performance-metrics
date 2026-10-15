@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:MauiAIAssistViewPerformanceMetrics.ViewModels"
              xmlns:views="clr-namespace:MauiAIAssistViewPerformanceMetrics.Views"
              x:Class="MauiAIAssistViewPerformanceMetrics.Views.MainPage"
-             x:DataType="vm:ChatViewModel">
+             x:DataType="vm:AssistViewModel">
     <VerticalStackLayout
         Padding="20"
         Spacing="20"

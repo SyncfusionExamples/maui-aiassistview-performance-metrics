@@ -18,7 +18,7 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var mainPage = _services.GetRequiredService<MainPage>();
-        mainPage.BindingContext = _services.GetRequiredService<ChatViewModel>();
+        mainPage.BindingContext = _services.GetRequiredService<AssistViewModel>();
         return new Window(new NavigationPage(mainPage));
     }
 }

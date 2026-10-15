@@ -12,7 +12,7 @@ public partial class AssistViewPage : ContentPage
 
     private void OnAssistViewLayoutArranged(object? sender, EventArgs e)
     {
-        if (BindingContext is ChatViewModel viewModel)
+        if (BindingContext is AssistViewModel viewModel)
         {
             viewModel.CompleteLoadAfterArrange();
         }
