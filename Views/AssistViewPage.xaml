@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiAiAssistViewPerformanceMetrics.ViewModels"
+             xmlns:controls="clr-namespace:MauiAiAssistViewPerformanceMetrics.Control"
+             xmlns:markdown="clr-namespace:Syncfusion.Maui.MarkdownViewer;assembly=Syncfusion.Maui.MarkdownViewer"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.AIAssistView;assembly=Syncfusion.Maui.AIAssistView"
+             x:Class="MauiAiAssistViewPerformanceMetrics.Views.AssistViewPage"
+             x:DataType="vm:ChatViewModel"
+             Title="AssistView Benchmark">
+    <Grid RowDefinitions="Auto,*">
+        <Button
+            Grid.Row="0"
+            Margin="5"
+            Text="Get Details"
+            Command="{Binding GetDetailsCommand}" />
+        <controls:BenchmarkAssistView
+            x:Name="AssistView"
+            Grid.Row="1"
+            AssistItems="{Binding AssistItems}">
+            <controls:BenchmarkAssistView.ResponseItemTemplate>
+                <DataTemplate x:DataType="syncfusion:AssistItem">
+                    <markdown:SfMarkdownViewer
+                        HeightRequest="200"
+                        Source="{Binding Text}" />
+                </DataTemplate>
+            </controls:BenchmarkAssistView.ResponseItemTemplate>
+        </controls:BenchmarkAssistView>
+    </Grid>
+</ContentPage>
