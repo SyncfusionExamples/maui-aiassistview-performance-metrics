@@ -2,7 +2,7 @@ using Syncfusion.Maui.AIAssistView;
 
 namespace MauiAIAssistViewPerformanceMetrics.Control;
 
-public class BenchmarkAssistView : SfAIAssistView
+public class CustomAIAssistView : SfAIAssistView
 {
     public event EventHandler? LayoutArranged;
 

@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
+using MauiAIAssistViewPerformanceMetrics.Behaviors;
 using MauiAIAssistViewPerformanceMetrics.Models;
 using Syncfusion.Maui.AIAssistView;
 
 namespace MauiAIAssistViewPerformanceMetrics.ViewModels;
 
-public sealed class AssistViewModel : INotifyPropertyChanged
+public sealed class AssistViewModel : INotifyPropertyChanged, IAssistViewLoadAware
 {
     private const int TotalItemsPerRun = 100;
     private const int WarmupRunCount = 1;
@@ -74,7 +75,7 @@ public sealed class AssistViewModel : INotifyPropertyChanged
         _loadStopwatch = Stopwatch.StartNew();
     }
 
-    public void CompleteLoadAfterArrange()
+    public void OnAssistViewLayoutArranged()
     {
         if (_loadStopwatch is not { IsRunning: true } stopwatch ||
             AssistItems.Count != TotalItemsPerRun)

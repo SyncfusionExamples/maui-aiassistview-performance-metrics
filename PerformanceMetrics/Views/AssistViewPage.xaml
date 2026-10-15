@@ -4,12 +4,10 @@
              xmlns:behaviors="clr-namespace:MauiAIAssistViewPerformanceMetrics.Behaviors"
              xmlns:vm="clr-namespace:MauiAIAssistViewPerformanceMetrics.ViewModels"
              xmlns:controls="clr-namespace:MauiAIAssistViewPerformanceMetrics.Control"
-             xmlns:markdown="clr-namespace:Syncfusion.Maui.MarkdownViewer;assembly=Syncfusion.Maui.MarkdownViewer"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.AIAssistView;assembly=Syncfusion.Maui.AIAssistView"
              x:Class="MauiAIAssistViewPerformanceMetrics.Views.AssistViewPage"
              x:DataType="vm:AssistViewModel"
              Title="AssistView Benchmark">
-    
+
     <Grid RowDefinitions="Auto,*">
         <Button
             Grid.Row="0"
@@ -22,10 +20,12 @@
                     Cancel="OK" />
             </Button.Behaviors>
         </Button>
-        <controls:BenchmarkAssistView
-                                    x:Name="AssistView"
-                                    Grid.Row="1"
-                                    AssistItems="{Binding AssistItems}">    
-        </controls:BenchmarkAssistView>
+        <controls:CustomAIAssistView
+            Grid.Row="1"
+            AssistItems="{Binding AssistItems}">
+            <controls:CustomAIAssistView.Behaviors>
+                <behaviors:AssistViewLoadCompletionBehavior />
+            </controls:CustomAIAssistView.Behaviors>
+        </controls:CustomAIAssistView>
     </Grid>
 </ContentPage>
