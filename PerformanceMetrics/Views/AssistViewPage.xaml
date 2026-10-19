@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:MauiAIAssistViewPerformanceMetrics.Behaviors"
+             xmlns:vm="clr-namespace:MauiAIAssistViewPerformanceMetrics.ViewModels"
+             xmlns:controls="clr-namespace:MauiAIAssistViewPerformanceMetrics.Control"
+             x:Class="MauiAIAssistViewPerformanceMetrics.Views.AssistViewPage"
+             x:DataType="vm:AssistViewModel"
+             Title="AssistView Benchmark">
+
+    <Grid RowDefinitions="Auto,*">
+        <Button
+            Grid.Row="0"
+            Margin="5"
+            Text="Get Details">
+            <Button.Behaviors>
+                <behaviors:DisplayAlertBehavior
+                    Title="Benchmark Details"
+                    Message="{Binding BenchmarkDetails}"
+                    Cancel="OK" />
+            </Button.Behaviors>
+        </Button>
+        <controls:CustomAIAssistView
+            Grid.Row="1"
+            AssistItems="{Binding AssistItems}">
+            <controls:CustomAIAssistView.Behaviors>
+                <behaviors:AssistViewLoadCompletionBehavior />
+            </controls:CustomAIAssistView.Behaviors>
+        </controls:CustomAIAssistView>
+    </Grid>
+</ContentPage>

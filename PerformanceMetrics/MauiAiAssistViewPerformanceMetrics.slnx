@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MauiAiAssistViewPerformanceMetrics.csproj" DisplayName="MauiAIAssistViewPerformanceMetrics">
+    <Deploy />
+  </Project>
+</Solution>
